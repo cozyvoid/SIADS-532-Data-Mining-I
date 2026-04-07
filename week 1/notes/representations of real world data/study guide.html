@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Representations in Data Mining — Study Sheet</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --red: #fee2e2;
+      --red-b: #ef4444;
+      --orange: #ffedd5;
+      --orange-b: #f97316;
+      --yellow: #fef3c7;
+      --yellow-b: #f59e0b;
+      --green: #dcfce7;
+      --green-b: #22c55e;
+      --teal: #ccfbf1;
+      --teal-b: #14b8a6;
+      --blue: #dbeafe;
+      --blue-b: #3b82f6;
+      --indigo: #e0e7ff;
+      --indigo-b: #6366f1;
+      --purple: #f3e8ff;
+      --purple-b: #a855f7;
+      --pink: #fce7f3;
+      --pink-b: #ec4899;
+      --gray: #f3f4f6;
+      --gray-b: #6b7280;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      margin: 0 0 8px 0;
+      font-size: 2rem;
+    }
+    .hero p {
+      margin: 0;
+      color: #e5edff;
+      font-size: 1rem;
+    }
+    .memory-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .mini {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+    }
+    .mini strong { display: block; margin-bottom: 6px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .head {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      border: 2px solid transparent;
+    }
+    .red { background: var(--red); border-color: var(--red-b); }
+    .orange { background: var(--orange); border-color: var(--orange-b); }
+    .yellow { background: var(--yellow); border-color: var(--yellow-b); }
+    .green { background: var(--green); border-color: var(--green-b); }
+    .teal { background: var(--teal); border-color: var(--teal-b); }
+    .blue { background: var(--blue); border-color: var(--blue-b); }
+    .indigo { background: var(--indigo); border-color: var(--indigo-b); }
+    .purple { background: var(--purple); border-color: var(--purple-b); }
+    .pink { background: var(--pink); border-color: var(--pink-b); }
+    .gray { background: var(--gray); border-color: var(--gray-b); }
+
+    .prompt {
+      font-weight: 700;
+      margin: 8px 0 6px;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    li { margin: 4px 0; }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f8fafc;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef2ff;
+      font-size: 0.85rem;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+    @media (max-width: 900px) {
+      .grid, .footer-grid, .memory-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Data Representations in Data Mining</h1>
+      <p>Color-coded study sheet for fast review: what each representation is, what it preserves, and when to use it.</p>
+    </section>
+
+    <section class="memory-bar">
+      <div class="mini"><strong>Presence</strong> Item Set</div>
+      <div class="mini"><strong>Features</strong> Vector / Matrix</div>
+      <div class="mini"><strong>Order</strong> Sequence</div>
+      <div class="mini"><strong>Change over time</strong> Time Series</div>
+      <div class="mini"><strong>Location</strong> Spatial</div>
+      <div class="mini"><strong>Location + time</strong> Spatiotemporal</div>
+      <div class="mini"><strong>Connections</strong> Graph / Network</div>
+      <div class="mini"><strong>Continuous arrival</strong> Stream</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="head red">🔴 Item Set</div>
+        <div class="prompt">Main question:</div>
+        <div>What items are present?</div>
+        <div class="prompt">Best for:</div>
+        <div>Co-occurrence and frequent combinations</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Presence / absence</li><li>Co-occurrence</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Order</li><li>Timing</li><li>Often frequency</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">{milk, bread, eggs}</div>
+      </div>
+
+      <div class="card">
+        <div class="head orange">🟠 Vector / Matrix</div>
+        <div class="prompt">Main question:</div>
+        <div>What features describe the object, and by how much?</div>
+        <div class="prompt">Best for:</div>
+        <div>Most standard machine learning tasks</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Feature values</li><li>Counts</li><li>Weights</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Order unless encoded</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">&lt;1, 0, 3, 2&gt;</div>
+      </div>
+
+      <div class="card">
+        <div class="head yellow">🟡 Sequence</div>
+        <div class="prompt">Main question:</div>
+        <div>In what order did things happen?</div>
+        <div class="prompt">Best for:</div>
+        <div>Behavior paths, next-event prediction, clickstreams</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Order</li><li>Repetition</li><li>Transitions</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Rich numeric trends unless added separately</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">[search → view item → add to cart → purchase]</div>
+      </div>
+
+      <div class="card">
+        <div class="head green">🟢 Time Series</div>
+        <div class="prompt">Main question:</div>
+        <div>How does a value change over time?</div>
+        <div class="prompt">Best for:</div>
+        <div>Forecasting, trends, seasonality, anomalies</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Temporal order</li><li>Trend</li><li>Seasonality</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Complex relationships unless modeled separately</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Daily temperature or stock prices</div>
+      </div>
+
+      <div class="card">
+        <div class="head teal">🟦 Spatial</div>
+        <div class="prompt">Main question:</div>
+        <div>Where is it?</div>
+        <div class="prompt">Best for:</div>
+        <div>Maps, hotspots, proximity analysis</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Location</li><li>Distance</li><li>Geographic proximity</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Time unless added separately</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Crime incidents by latitude/longitude</div>
+      </div>
+
+      <div class="card">
+        <div class="head blue">🔵 Spatiotemporal</div>
+        <div class="prompt">Main question:</div>
+        <div>Where and when did it happen?</div>
+        <div class="prompt">Best for:</div>
+        <div>Trajectories, traffic, movement, outbreaks</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Location</li><li>Time</li><li>Movement patterns</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Simplicity; this format can be complex and large</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">GPS traces of vehicles</div>
+      </div>
+
+      <div class="card">
+        <div class="head indigo">🟣 Graph / Network</div>
+        <div class="prompt">Main question:</div>
+        <div>How are entities connected?</div>
+        <div class="prompt">Best for:</div>
+        <div>Communities, influence, fraud, recommendations</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Nodes</li><li>Edges</li><li>Connectivity</li><li>Paths</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Regular time structure or physical space unless added</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Social network of users</div>
+      </div>
+
+      <div class="card">
+        <div class="head pink">🌸 Stream</div>
+        <div class="prompt">Main question:</div>
+        <div>How do we process data as it arrives?</div>
+        <div class="prompt">Best for:</div>
+        <div>Real-time monitoring and online analysis</div>
+        <div class="prompt">Preserves:</div>
+        <ul><li>Arrival order</li><li>Recent behavior</li><li>Live updates</li></ul>
+        <div class="prompt">Usually loses:</div>
+        <ul><li>Complete history if storage is limited</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Live sensor feed or transaction stream</div>
+      </div>
+    </section>
+
+    <section class="footer-grid">
+      <div class="card">
+        <div class="head gray">Fast distinctions</div>
+        <table>
+          <tr><th>Compare</th><th>Key difference</th></tr>
+          <tr><td>Item Set vs Vector</td><td>Item set focuses on presence; vector can also store counts, weights, and numeric values.</td></tr>
+          <tr><td>Sequence vs Time Series</td><td>Sequence focuses on ordered events; time series focuses on numeric values indexed by time.</td></tr>
+          <tr><td>Spatial vs Graph</td><td>Spatial is about physical location; graph is about connections and relationships.</td></tr>
+          <tr><td>Time Series vs Stream</td><td>Time series is a data form; stream is a real-time arrival setting.</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="head gray">How to choose the right representation</div>
+        <div class="tag">Item Set = co-occurrence</div>
+        <div class="tag">Vector = features</div>
+        <div class="tag">Sequence = order</div>
+        <div class="tag">Time Series = trends</div>
+        <div class="tag">Spatial = maps</div>
+        <div class="tag">Spatiotemporal = movement</div>
+        <div class="tag">Graph = relationships</div>
+        <div class="tag">Stream = real-time</div>
+        <div class="prompt">Memory line:</div>
+        <div><strong>Presence, Features, Order, Change, Location, Location+Time, Connections, Continuous Arrival</strong></div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
