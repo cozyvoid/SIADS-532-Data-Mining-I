@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Mining Functionalities — Study Sheet</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --red: #fee2e2;
+      --red-b: #ef4444;
+      --orange: #ffedd5;
+      --orange-b: #f97316;
+      --yellow: #fef3c7;
+      --yellow-b: #f59e0b;
+      --green: #dcfce7;
+      --green-b: #22c55e;
+      --teal: #ccfbf1;
+      --teal-b: #14b8a6;
+      --blue: #dbeafe;
+      --blue-b: #3b82f6;
+      --indigo: #e0e7ff;
+      --indigo-b: #6366f1;
+      --purple: #f3e8ff;
+      --purple-b: #a855f7;
+      --pink: #fce7f3;
+      --pink-b: #ec4899;
+      --gray: #f3f4f6;
+      --gray-b: #6b7280;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #111827, #2563eb);
+      color: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      margin: 0 0 8px 0;
+      font-size: 2rem;
+    }
+    .hero p {
+      margin: 0;
+      color: #e5edff;
+      font-size: 1rem;
+    }
+    .memory-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .mini {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+    }
+    .mini strong { display: block; margin-bottom: 6px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .head {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      border: 2px solid transparent;
+    }
+    .red { background: var(--red); border-color: var(--red-b); }
+    .orange { background: var(--orange); border-color: var(--orange-b); }
+    .yellow { background: var(--yellow); border-color: var(--yellow-b); }
+    .green { background: var(--green); border-color: var(--green-b); }
+    .teal { background: var(--teal); border-color: var(--teal-b); }
+    .blue { background: var(--blue); border-color: var(--blue-b); }
+    .indigo { background: var(--indigo); border-color: var(--indigo-b); }
+    .purple { background: var(--purple); border-color: var(--purple-b); }
+    .pink { background: var(--pink); border-color: var(--pink-b); }
+    .gray { background: var(--gray); border-color: var(--gray-b); }
+
+    .prompt {
+      font-weight: 700;
+      margin: 8px 0 6px;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    li { margin: 4px 0; }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f8fafc; }
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef2ff;
+      font-size: 0.85rem;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+    @media (max-width: 900px) {
+      .grid, .footer-grid, .memory-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Data Mining Functionalities</h1>
+      <p>Color-coded study sheet for fast review: what each functionality does, what question it answers, and when to use it.</p>
+    </section>
+
+    <section class="memory-bar">
+      <div class="mini"><strong>Summarize</strong> OLAP</div>
+      <div class="mini"><strong>Co-occur</strong> Association</div>
+      <div class="mini"><strong>Label</strong> Classification</div>
+      <div class="mini"><strong>Estimate</strong> Prediction</div>
+      <div class="mini"><strong>Group</strong> Clustering</div>
+      <div class="mini"><strong>Order</strong> Ranking</div>
+      <div class="mini"><strong>Flag unusual</strong> Outlier Detection</div>
+      <div class="mini"><strong>Core idea</strong> Same data, different task</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="head red">🔴 OLAP</div>
+        <div class="prompt">Main question:</div>
+        <div>What happened, where, and when?</div>
+        <div class="prompt">Best for:</div>
+        <div>Summarizing and exploring data across dimensions</div>
+        <div class="prompt">Typical output:</div>
+        <ul><li>Pivot tables</li><li>Aggregated summaries</li><li>Drill-down reports</li></ul>
+        <div class="prompt">Key operations:</div>
+        <ul><li>Roll-up</li><li>Drill-down</li><li>Slice</li><li>Dice</li><li>Pivot</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Sales by region, quarter, and product category</div>
+      </div>
+
+      <div class="card">
+        <div class="head orange">🟠 Association</div>
+        <div class="prompt">Main question:</div>
+        <div>What tends to happen together?</div>
+        <div class="prompt">Best for:</div>
+        <div>Finding co-occurrence patterns and rules</div>
+        <div class="prompt">Typical output:</div>
+        <ul><li>Association rules</li><li>Support</li><li>Confidence</li><li>Lift</li></ul>
+        <div class="prompt">Remember:</div>
+        <ul><li>Useful for pattern discovery</li><li>Does not imply causation</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">{bread, butter} → {jam}</div>
+      </div>
+
+      <div class="card">
+        <div class="head yellow">🟡 Classification</div>
+        <div class="prompt">Main question:</div>
+        <div>Which category does this belong to?</div>
+        <div class="prompt">Best for:</div>
+        <div>Assigning objects to predefined labels</div>
+        <div class="prompt">Typical output:</div>
+        <ul><li>Class label</li><li>Class probability</li></ul>
+        <div class="prompt">Learning type:</div>
+        <ul><li>Supervised</li><li>Needs labeled training data</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Spam vs not spam, approve vs deny</div>
+      </div>
+
+      <div class="card">
+        <div class="head green">🟢 Prediction</div>
+        <div class="prompt">Main question:</div>
+        <div>What value should we expect?</div>
+        <div class="prompt">Best for:</div>
+        <div>Estimating future or unknown numeric values</div>
+        <div class="prompt">Typical output:</div>
+        <ul><li>Numeric estimate</li><li>Forecast</li></ul>
+        <div class="prompt">Learning type:</div>
+        <ul><li>Usually supervised</li><li>Often regression-style tasks</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">House price, next month’s sales, demand forecast</div>
+      </div>
+
+      <div class="card">
+        <div class="head teal">🟦 Clustering</div>
+        <div class="prompt">Main question:</div>
+        <div>What natural groups exist?</div>
+        <div class="prompt">Best for:</div>
+        <div>Finding similar groups without predefined labels</div>
+        <div class="prompt">Typical output:</div>
+        <ul><li>Clusters</li><li>Segments</li><li>Cluster assignments</li></ul>
+        <div class="prompt">Learning type:</div>
+        <ul><li>Unsupervised</li><li>Useful when labels are unavailable</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Customer segments like budget, loyal, premium</div>
+      </div>
+
+      <div class="card">
+        <div class="head blue">🔵 Ranking</div>
+        <div class="prompt">Main question:</div>
+        <div>Which items should come first?</div>
+        <div class="prompt">Best for:</div>
+        <div>Ordering items by relevance, importance, or priority</div>
+        <div class="prompt">Typical output:</div>
+        <ul><li>Ordered list</li><li>Scores</li><li>Top-k results</li></ul>
+        <div class="prompt">Can be:</div>
+        <ul><li>Supervised or unsupervised</li><li>Search, recommendation, triage</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Search results, ranked products, risk priority list</div>
+      </div>
+
+      <div class="card" style="grid-column: 1 / -1;">
+        <div class="head indigo">🟣 Outlier / Anomaly Detection</div>
+        <div class="prompt">Main question:</div>
+        <div>What does not fit the normal pattern?</div>
+        <div class="prompt">Best for:</div>
+        <div>Finding rare, suspicious, or unusual cases</div>
+        <div class="prompt">Typical output:</div>
+        <ul><li>Anomaly flag</li><li>Anomaly score</li><li>Ranked unusual cases</li></ul>
+        <div class="prompt">Common types:</div>
+        <ul><li>Point anomaly</li><li>Contextual anomaly</li><li>Collective anomaly</li></ul>
+        <div class="prompt">Example:</div>
+        <div class="muted">Fraudulent transaction, unusual sensor spike, suspicious login</div>
+      </div>
+    </section>
+
+    <section class="footer-grid">
+      <div class="card">
+        <div class="head gray">Fast distinctions</div>
+        <table>
+          <tr><th>Compare</th><th>Key difference</th></tr>
+          <tr><td>Classification vs Prediction</td><td>Classification predicts a category; prediction usually predicts a numeric value.</td></tr>
+          <tr><td>Classification vs Clustering</td><td>Classification uses known labels; clustering finds groups without labels.</td></tr>
+          <tr><td>OLAP vs Data Mining Models</td><td>OLAP summarizes and explores; mining models discover patterns or make predictions.</td></tr>
+          <tr><td>Ranking vs Classification</td><td>Ranking orders candidates; classification assigns a class.</td></tr>
+          <tr><td>Clustering vs Outlier Detection</td><td>Clustering finds common group structure; outlier detection finds rare exceptions.</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="head gray">How to choose</div>
+        <div class="tag">OLAP = summarize</div>
+        <div class="tag">Association = together</div>
+        <div class="tag">Classification = label</div>
+        <div class="tag">Prediction = estimate</div>
+        <div class="tag">Clustering = group</div>
+        <div class="tag">Ranking = order</div>
+        <div class="tag">Outlier = unusual</div>
+        <div class="prompt">Memory line:</div>
+        <div><strong>Summarize, Co-occur, Label, Estimate, Group, Order, Flag Unusual</strong></div>
+        <div class="prompt">One dataset, many tasks:</div>
+        <div class="muted">Retail data can support OLAP reports, association rules, churn classification, sales prediction, customer clustering, product ranking, and fraud detection.</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
